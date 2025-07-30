@@ -2,45 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Login ke Akunmu</h2>
-        <form action="{{ route('login.store') }}" method="POST">
-            @csrf
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                <input type="email" id="email" name="email" placeholder="you@example.com"
-                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-                    required>
-            </div>
+<body class="bg-white h-screen flex items-center justify-center">
+    <div class="flex w-full max-w-5xl shadow-xl rounded-2xl overflow-hidden">
+        <!-- Kiri: Gambar -->
+        <div
+            class="w-1/2 bg-gradient-to-br from-[#8C4DFF] via-purple-500 to-purple-400 flex items-center justify-center p-6">
+            <img src="/illustration.png" alt="gambar" class="max-h-96 object-contain">
+        </div>
 
-            <div class="mb-6">
-                <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                <input type="password" id="password" name="password" placeholder="••••••••"
-                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-                    required>
-            </div>
+        <!-- Kanan: Form Login -->
+        <div class="w-1/2 bg-white p-10">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Login ke Akunmu</h2>
 
-            <div class="flex items-center justify-between">
+            <form action="{{ route('login.store') }}" method="POST" class="space-y-5">
+                @csrf
+
+                <div>
+                    <input type="email" id="email" name="email" placeholder="Email"
+                        class="w-full px-5 py-3 bg-gray-100 text-gray-700 placeholder-gray-500 rounded-full focus:outline-none focus:ring-2 focus:ring-[#8C4DFF]"
+                        required />
+                </div>
+
+                <div class="relative">
+                    <input type="password" id="password" name="password" placeholder="Password"
+                        class="w-full px-5 py-3 bg-gray-100 text-gray-700 placeholder-gray-500 rounded-full focus:outline-none focus:ring-2 focus:ring-[#8C4DFF]"
+                        required />
+                    <div class="absolute inset-y-0 right-4 flex items-center text-gray-400 cursor-pointer">
+                        <!-- Ikon mata opsional -->
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center text-sm px-1">
+                    <label class="inline-flex items-center space-x-2 text-gray-700">
+                        <input type="checkbox" class="form-checkbox text-[#8C4DFF]">
+                        <span>Ingat saya</span>
+                    </label>
+                </div>
+
                 <button type="submit"
-                    class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
-                    Sign In
+                    class="w-full bg-[#8C4DFF] hover:bg-purple-700 text-white font-semibold py-3 rounded-full transition duration-200">
+                    Login
                 </button>
-            </div>
 
-            <p class="text-center text-gray-500 text-sm mt-6">
-                Belum punya akun?
-                <a href="/register" class="font-bold text-blue-500 hover:text-blue-800">
-                    Register disini
-                </a>
-            </p>
-        </form>
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    Belum punya akun?
+                    <a href="/register" class="text-[#8C4DFF] font-semibold hover:underline">Register disini</a>
+                </p>
+            </form>
+        </div>
     </div>
 </body>
 
