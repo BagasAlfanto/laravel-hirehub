@@ -11,7 +11,8 @@
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Login ke Akunmu</h2>
-        <form action="#" method="POST">
+        <form action="{{ route('login.store') }}" method="POST">
+            @csrf
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
                 <input type="email" id="email" name="email" placeholder="you@example.com"

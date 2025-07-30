@@ -11,10 +11,11 @@
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Buat Akun</h2>
-        <form action="#" method="POST">
+        <form action="{{ route('register.store') }}" method="POST">
+            @csrf
             <div class="mb-4">
                 <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-                <input type="text" id="username" name="username" placeholder="yourusername"
+                <input type="text" id="username" name="username" placeholder="Username"
                     class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
                     required>
             </div>
@@ -34,13 +35,12 @@
             </div>
 
             <div class="mb-6">
-                <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Role</label>
+                <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Anda sebagai</label>
                 <select id="role" name="role"
                     class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
                     required>
-                    <option value="" disabled selected>Pilih rolemu</option>
                     <option value="penyedia">Penyedia Lowongan Kerja</option>
-                    <option value="pelamar">Pencari Lowongan Kerja</option>
+                    <option value="pencari">Pencari Lowongan Kerja</option>
                 </select>
             </div>
 
