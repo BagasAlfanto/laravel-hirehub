@@ -2,62 +2,73 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Buat Akun</h2>
-        <form action="{{ route('register.store') }}" method="POST">
-            @csrf
-            <div class="mb-4">
-                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-                <input type="text" id="username" name="username" placeholder="Username"
-                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-                    required>
-            </div>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="flex w-full max-w-5xl bg-white shadow-md rounded-2xl overflow-hidden">
 
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                <input type="email" id="email" name="email" placeholder="you@example.com"
-                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-                    required>
-            </div>
+        <!-- Kiri -->
+        <div class="w-1/2 p-10">
+            <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Buat Akun</h2>
 
-            <div class="mb-4">
-                <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                <input type="password" id="password" name="password" placeholder="••••••••"
-                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-                    required>
-            </div>
+            <form action="{{ route('register.store') }}" method="POST" class="space-y-5">
+                @csrf
 
-            <div class="mb-6">
-                <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Anda sebagai</label>
-                <select id="role" name="role"
-                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
-                    required>
-                    <option value="penyedia">Penyedia Lowongan Kerja</option>
-                    <option value="pencari">Pencari Lowongan Kerja</option>
-                </select>
-            </div>
+                <div>
+                    <input type="text" id="username" name="username" placeholder="Username"
+                        class="w-full px-5 py-3 bg-gray-100 text-gray-700 placeholder-gray-500 rounded-full focus:outline-none focus:ring-2 focus:ring-[#8C4DFF]"
+                        required>
+                </div>
 
-            <div class="flex items-center justify-between">
+                <div>
+                    <input type="email" id="email" name="email" placeholder="Email"
+                        class="w-full px-5 py-3 bg-gray-100 text-gray-700 placeholder-gray-500 rounded-full focus:outline-none focus:ring-2 focus:ring-[#8C4DFF]"
+                        required>
+                </div>
+
+                <div class="relative">
+                    <input type="password" id="password" name="password" placeholder="Password"
+                        class="w-full px-5 py-3 bg-gray-100 text-gray-700 placeholder-gray-500 rounded-full focus:outline-none focus:ring-2 focus:ring-[#8C4DFF]"
+                        required>
+                    <div class="absolute inset-y-0 right-4 flex items-center text-gray-400 cursor-pointer">
+
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <select id="role" name="role"
+                        class="appearance-none w-full px-5 py-3 bg-gray-100 text-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-[#8C4DFF]"
+                        required>
+                        <option value="" disabled selected>Pilih rolemu</option>
+                        <option value="penyedia">Penyedia Lowongan Kerja</option>
+                        <option value="pencari">Pencari Lowongan Kerja</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-5 flex items-center text-gray-400">
+                        ▼
+                    </div>
+                </div>
+
                 <button type="submit"
-                    class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
+                    class="w-full bg-[#8C4DFF] hover:bg-purple-700 text-white font-semibold py-3 rounded-full transition duration-200">
                     Register
                 </button>
-            </div>
 
-            <p class="text-center text-gray-500 text-sm mt-6">
-                Sudah punya akun?
-                <a href="/login" class="font-bold text-blue-500 hover:text-blue-800">
-                    Login disini
-                </a>
-            </p>
-        </form>
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    Sudah punya akun?
+                    <a href="/login" class="text-[#8C4DFF] font-semibold hover:underline">Login disini</a>
+                </p>
+            </form>
+        </div>
+
+        <!-- Kanan -->
+        <div class="w-1/2 bg-gray-200 flex items-center justify-center p-6">
+            <img src="/illustration.png" alt="Ilustrasi" class="max-h-96 object-contain">
+        </div>
+
     </div>
 </body>
 
