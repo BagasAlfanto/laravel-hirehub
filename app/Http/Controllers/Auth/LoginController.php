@@ -12,10 +12,9 @@ class LoginController extends Controller
     }
 
     public function store(Request $request){
-        // Handle login logic here
         $validate = $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
         ]);
 
         if (auth()->attempt($validate)) {
