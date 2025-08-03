@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="bg-white h-screen flex items-center justify-center">
@@ -19,7 +21,8 @@
         <!-- Kanan: Form Login -->
         <div class="w-full md:w-1/2 bg-white p-6 md:p-10">
             <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Login ke Akunmu</h2>
-            <form action="{{ route('login.store') }}" method="POST" class="space-y-5" onsubmit="return validateForm();">
+            <form action="{{ route('login.store') }}" method="POST" class="space-y-5"
+                onsubmit="return validateForm();">
                 @csrf
                 <div>
                     <input type="email" id="email" name="email" placeholder="Email"
@@ -60,7 +63,7 @@
 
     <script>
         document.querySelectorAll('.toggle-password').forEach(item => {
-            item.addEventListener('click', function () {
+            item.addEventListener('click', function() {
                 const input = document.querySelector(this.getAttribute('toggle'));
                 if (input.type === "password") {
                     input.type = "text";
@@ -71,7 +74,7 @@
                 }
             });
         });
-        
+
         function validateForm() {
             const emailInput = document.getElementById("email").value;
             const allowedDomains = ["gmail.com", "yahoo.com", "outlook.com"];
@@ -99,6 +102,7 @@
             return valid;
         }
     </script>
+
 </body>
 
 </html>
