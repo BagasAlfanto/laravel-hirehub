@@ -27,6 +27,7 @@ class RegisterController extends Controller
 
         User::create($credentials);
 
-        return redirect()->route('login')->with('success', 'Registrasi berhasil, silakan login.');
+        // return redirect()->route('login')->with('success', 'Registrasi berhasil, silakan login.');
+        return redirect()->route('register.index')->with('show_success', true);
     }
 }
