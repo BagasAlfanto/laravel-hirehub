@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-gray-100 h-screen flex items-center justify-center">
@@ -13,7 +14,8 @@
         <!-- Kiri -->
         <div class="w-full md:w-1/2 p-6 md:p-10">
             <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Buat Akun</h2>
-            <form action="{{ route('register.store') }}" method="POST" class="space-y-5" onsubmit="return validateForm();">
+            <form action="{{ route('register.store') }}" method="POST" class="space-y-5"
+                onsubmit="return validateForm();">
                 @csrf
                 <div>
                     <input type="text" id="username" name="username" placeholder="Username"
@@ -44,8 +46,10 @@
                         class="appearance-none w-full px-5 py-3 bg-gray-100 text-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-[#8C4DFF]"
                         required>
                         <option value="" disabled {{ old('role') ? '' : 'selected' }}>Pilih rolemu</option>
-                        <option value="penyedia" {{ old('role') == 'penyedia' ? 'selected' : '' }}>Penyedia Lowongan Kerja</option>
-                        <option value="pencari" {{ old('role') == 'pencari' ? 'selected' : '' }}>Pencari Lowongan Kerja</option>
+                        <option value="penyedia" {{ old('role') == 'penyedia' ? 'selected' : '' }}>Penyedia Lowongan
+                            Kerja</option>
+                        <option value="pencari" {{ old('role') == 'pencari' ? 'selected' : '' }}>Pencari Lowongan Kerja
+                        </option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-5 flex items-center text-gray-400">
                         ▼
@@ -68,45 +72,47 @@
     </div>
 
     <script>
-        document.querySelectorAll('.toggle-password').forEach(item => {
-            item.addEventListener('click', function () {
-                const input = document.querySelector(this.getAttribute('toggle'));
-                if (input.type === "password") {
-                    input.type = "text";
-                    this.textContent = "🙈";
-                } else {
-                    input.type = "password";
-                    this.textContent = "👁️";
-                }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle password
+            document.querySelectorAll('.toggle-password').forEach(item => {
+                item.addEventListener('click', function() {
+                    const input = document.querySelector(this.getAttribute('toggle'));
+                    if (input.type === "password") {
+                        input.type = "text";
+                        this.textContent = "🙈";
+                    } else {
+                        input.type = "password";
+                        this.textContent = "👁️";
+                    }
+                });
             });
+
+            @if ($errors->any())
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Registrasi!',
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
+                    confirmButtonColor: '#8C4DFF'
+                });
+            @endif
+
+            @if (session('show_success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registrasi Berhasil!',
+                    text: 'Silakan login sekarang.',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#8C4DFF'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "{{ route('login') }}";
+                    }
+                });
+            @endif
         });
-
-        function validateForm() {
-            const emailInput = document.getElementById("email").value;
-            const allowedDomains = ["gmail.com", "yahoo.com", "outlook.com"];
-            const emailErrorMsg = document.getElementById("emailErrorMsg");
-            const passwordInput = document.getElementById("password").value;
-            const passwordErrorMsg = document.getElementById("passwordErrorMsg");
-
-            let valid = true;
-
-            const emailDomain = emailInput.split("@")[1];
-            if (allowedDomains.includes(emailDomain)) {
-                emailErrorMsg.textContent = "";
-            } else {
-                emailErrorMsg.textContent = "Hanya email dari gmail, yahoo, atau outlook yang diizinkan.";
-                valid = false;
-            }
-
-            if (passwordInput.length >= 8) {
-                passwordErrorMsg.textContent = "";
-            } else {
-                passwordErrorMsg.textContent = "Password harus minimal 8 karakter.";
-                valid = false;
-            }
-
-            return valid;
-        }
     </script>
+
+
 </body>
+
 </html>
