@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('lowongans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_profile_id')->constrained('company_profiles')->onDelete('cascade');
+            $table->foreignId('company_profile_id')
+                ->constrained('company_profiles')
+                ->onDelete('cascade');
             $table->string('job_title');
             $table->text('job_description');
             $table->string('job_location')->nullable();
@@ -21,7 +23,6 @@ return new class extends Migration
             $table->decimal('salary', 10, 2)->nullable();
             $table->date('application_deadline')->nullable();
             $table->enum('status', ['open', 'closed'])->default('open');
-            $table->string('contact_phone')->nullable();
             $table->timestamps();
         });
     }

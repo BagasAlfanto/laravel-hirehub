@@ -15,15 +15,15 @@ class UserSeeder extends Seeder
     {
         User::create([
             'username' => 'Penyedia Kerja',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('password'),
+            'email' => 'bagas@gmail.com',
+            'password' => bcrypt('bagasgeming'),
             'role' => 'penyedia',
         ]);
 
         User::create([
             'username' => 'Pencari Kerja',
-            'email' => 'user@user.com',
-            'password' => bcrypt('password'),
+            'email' => 'bintang@gmail.com',
+            'password' => bcrypt('bintanggeming'),
             'role' => 'pencari',
         ]);
     }
