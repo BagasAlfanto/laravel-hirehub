@@ -3,8 +3,7 @@
         <h1 class="text-3xl font-extrabold tracking-tight text-gray-800">
             {{ $slot }}
         </h1>
-
-        {{-- Tampilkan aksi hanya jika ada --}}
+        
         @if (isset($actions))
             <div class="flex items-center space-x-2">
                 {{ $actions }}
