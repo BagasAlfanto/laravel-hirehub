@@ -25,8 +25,8 @@ class User extends Authenticatable
         'role',
     ];
 
-    public function company(){
-        return $this->hasOne(CompanyProfile::class);
+    public function companies(){
+        return $this->hasMany(CompanyProfile::class);
     }
 
     /**
