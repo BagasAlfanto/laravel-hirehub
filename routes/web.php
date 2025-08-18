@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -17,10 +18,16 @@ Route::middleware('guest')->group(function () {
     Route::resource('register', RegisterController::class)->only(['index', 'store']);
 });
 
-Route::middleware('auth')->group(function (){
-    Route::get('/home', function () {
-        return view('dashboard.index');
-    })->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
-    Route::POST('/logout', [LogoutController::class, 'destroy'])->name('logout');
+    Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout');
 });
+
+// Route::middleware('auth')->group(function (){
+//     Route::get('/home', function () {
+//         return view('dashboard.index'); 
+//     })->name('home');
+
+//     Route::POST('/logout', [LogoutController::class, 'destroy'])->name('logout');
+// });
