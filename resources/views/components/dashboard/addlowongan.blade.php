@@ -2,7 +2,7 @@
 
     <x-navbar active="lowongan" />
 
-    <x-header>Buka Lowongan</x-header>
+    {{-- <x-header>Buka Lowongan</x-header> --}}
 
     <main>
         {{ $slot }}

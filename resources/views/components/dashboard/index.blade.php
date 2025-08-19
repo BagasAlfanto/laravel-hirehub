@@ -2,7 +2,7 @@
 
     <x-navbar active="dashboard" />
 
-    <x-header>Dashboard</x-header>
+    {{-- <x-header>Dashboard</x-header> --}}
 
     <main>
         {{ $slot }}

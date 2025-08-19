@@ -2,7 +2,7 @@
 
     <x-navbar active="profile" />
 
-    <x-header>Profile</x-header>
+    {{-- <x-header>Profile</x-header> --}}
 
     <div class="items-center">
         {{ $slot }}

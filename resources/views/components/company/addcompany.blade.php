@@ -2,7 +2,7 @@
 
     <x-navbar active="profile" />
 
-    <x-header>Tambah Perusahaan</x-header>
+    {{-- <x-header>Tambah Perusahaan</x-header> --}}
 
     <main>
         {{ $slot }}
