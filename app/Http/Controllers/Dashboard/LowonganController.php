@@ -9,6 +9,6 @@ class LowonganController extends Controller
 {
     public function index()
     {
-        return view('dashboard.lowongan');
+        return view('dashboard.lowongan.index');
     }
 }

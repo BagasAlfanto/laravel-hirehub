@@ -38,4 +38,15 @@ class CompanyController extends Controller
             ->with('success', 'Perusahaan berhasil ditambahkan.');
     }
 
+    public function show($id)
+    {
+        $company = CompanyProfile::findOrFail($id);
+        return view('dashboard.company.showcompany', compact('company'));
+    }
+
+    public function edit(CompanyProfile $company)
+    {
+        return view('dashboard.company.editcompany', compact('company'));
+    }
+
 }
