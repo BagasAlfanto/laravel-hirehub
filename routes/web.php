@@ -24,19 +24,9 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-    // Lowongan
-    Route::get('/dashboard/lowongan', [LowonganController::class, 'index'])->name('lowongan.index');
-
-    // Profile
-    // Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('profile.index');
-    // Route::get('/dashboard/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::put('/dashboard/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::resource('/dashboard/lowongan', LowonganController::class);
     Route::resource('/dashboard/profile', ProfileController::class);
-
-    // Company
-    Route::get('/dashboard/addcompany', [CompanyController::class, 'index'])->name('company.create');
-    Route::post('/dashboard/addcompany', [CompanyController::class, 'store'])->name('company.store');
-    Route::get('/dashboard/company/{id}', [CompanyController::class, 'show'])->name('company.show');
+    Route::resource('/dashboard/company', CompanyController::class);
 
     // Logout
     Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout');
