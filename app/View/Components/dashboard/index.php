@@ -3,17 +3,23 @@
 namespace App\View\Components\dashboard;
 
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Models\Lowongan;
+use App\Models\CompanyProfile;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
 class index extends Component
 {
+    // public $companies;
+    // public $lowongans;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        //
+        // $this->companies = CompanyProfile::where('user_id', auth()->id())->get();
+
+        // $this->lowongans = Lowongan::whereIn('company_profile_id', $this->companies->pluck('id'))->get();
     }
 
     /**
