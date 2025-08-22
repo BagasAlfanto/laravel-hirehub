@@ -14,18 +14,18 @@ class ProfileController extends Controller
         return view('dashboard.profile.index', compact('company'));
     }
 
-    public function edit($id)
+    public function edit($uid)
     {
         $user = auth()->user();
-        return view('dashboard.profile.edit', compact('user', 'id'));
+        return view('dashboard.profile.edit', compact('user', 'uid'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $uid)
     {
         $user = auth()->user();
         $validated = $request->validate([
             'username' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'email' => 'required|email|max:255|unique:users,email,' . $uid,
         ]);
 
         $user->update($validated);

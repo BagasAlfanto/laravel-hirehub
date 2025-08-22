@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Lowongan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\CompanyProfile;
 use App\Http\Controllers\Controller;
@@ -9,11 +11,25 @@ use App\Http\Controllers\Controller;
 class CompanyController extends Controller
 {
     public function index(){
+        if (CompanyProfile::where('user_id', auth()->id())->count() >= 3) {
+            return redirect()
+                ->route('profile.index')
+                ->withErrors(['limit' => 'Anda hanya dapat menambahkan maksimal 3 perusahaan.'])
+                ->withInput();
+        }
+
         return view('dashboard.company.addcompany');
     }
 
     public function store(Request $request)
     {
+        if (CompanyProfile::where('user_id', auth()->id())->count() >= 3) {
+            return redirect()
+                ->route('profile.index')
+                ->withErrors(['limit' => 'Anda hanya dapat menambahkan maksimal 3 perusahaan.'])
+                ->withInput();
+        }
+
         $validated = $request->validate([
             'company_name'        => 'required|string|max:255',
             'company_email'       => 'required|email|max:255|unique:company_profiles,company_email',
@@ -31,6 +47,8 @@ class CompanyController extends Controller
 
         $validated['user_id'] = auth()->id();
 
+        $validated['uid'] = Str::uuid()->toString();
+
         CompanyProfile::create($validated);
 
         return redirect()
@@ -38,15 +56,37 @@ class CompanyController extends Controller
             ->with('success', 'Perusahaan berhasil ditambahkan.');
     }
 
-    public function show($id)
+    public function show($uid)
     {
-        $company = CompanyProfile::findOrFail($id);
+        $company = CompanyProfile::where('uid', $uid)->firstOrFail();
         return view('dashboard.company.showcompany', compact('company'));
     }
 
-    public function edit(CompanyProfile $company)
+    public function edit($uid)
     {
+        $company = CompanyProfile::where('uid', $uid)->firstOrFail();
         return view('dashboard.company.editcompany', compact('company'));
+    }
+
+    public function destroy($uid)
+    {
+        $company = CompanyProfile::where('uid', $uid)->firstOrFail();
+        if ($company->user_id !== auth()->id()) {
+            return redirect()
+                ->route('profile.index')
+                ->withErrors(['unauthorized' => 'Anda tidak berhak menghapus perusahaan ini.']);
+        }
+
+        $company->delete();
+        if ($company->company_logo) {
+            \Storage::disk('public')->delete($company->company_logo);
+        }
+
+        Lowongan::where('company_profile_id', $company->id)->delete();
+
+        return redirect()
+            ->route('profile.index')
+            ->with('success', 'Perusahaan berhasil dihapus.');
     }
 
 }
