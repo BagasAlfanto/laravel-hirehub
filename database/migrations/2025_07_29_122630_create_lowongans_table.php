@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('lowongans', function (Blueprint $table) {
             $table->id();
+            $table->string('uid', 64)->unique();
             $table->foreignId('company_profile_id')
                 ->constrained('company_profiles')
                 ->onDelete('cascade');
