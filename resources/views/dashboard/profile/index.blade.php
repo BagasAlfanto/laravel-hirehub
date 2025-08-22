@@ -14,22 +14,31 @@
                     </div>
                 </div>
                 <div class="mt-4 md:mt-0">
-                    <a href="{{ route('profile.edit', Auth::user()->id) }}"
-                        class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
-                        <i class="fas fa-pencil-alt mr-2"></i>
-                        Edit Profile
-                    </a>
+                    <form action="{{ route('profile.edit', Auth::user()->uid) }}" method="get" class="inline">
+                        <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+                            <i class="fas fa-pencil-alt mr-2"></i>
+                            Edit Profile
+                        </button>
+                    </form>
                 </div>
             </div>
 
             <div class="p-6">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-semibold text-gray-800">Perusahaan Anda</h3>
-                    <a href="{{ route('company.create') }}"
-                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
-                        <i class="fas fa-plus mr-2"></i>
-                        Tambah Perusahaan
-                    </a>
+                    @if (!empty($company) && $company->count() < 3)
+                        <a href="{{ route('company.index') }}"
+                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+                            <i class="fas fa-plus mr-2"></i>
+                            Tambah Perusahaan
+                        </a>
+                    @elseif (!empty($company) && $company->count() >= 3)
+                        <span class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-400 bg-gray-100 cursor-not-allowed">
+                            <i class="fas fa-ban mr-2"></i>
+                            Maksimal 3 perusahaan
+                        </span>
+                    @endif
                 </div>
 
                 <div class="mt-4 space-y-4">
@@ -47,7 +56,7 @@
                                         <div class="text-gray-500 text-sm">{{ $companyItem->company_field }}</div>
                                     </div>
                                 </div>
-                                <a href="{{ route('company.show', $companyItem->id) }}"
+                                <a href="{{ route('company.show', $companyItem->uid) }}"
                                     class="text-blue-600 hover:text-blue-800 font-medium text-sm transition">Lihat
                                     Detail →</a>
                             </div>
