@@ -78,14 +78,24 @@
     </div>
 
     <div id="mobile-menu" class="md:hidden hidden px-2 pt-2 pb-3 space-y-1">
-        <a href="{{ route('dashboard.index') }}"
-            class="{{ $active == 'dashboard' ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900' }} block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-        <a href="{{ route('lowongan.index') }}"
-            class="{{ $active == 'lowongan' ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900' }} block px-3 py-2 rounded-md text-base font-medium">Cari
-            Info Lowongan</a>
-        <a href="{{ route('profile.index') }}"
-            class="{{ $active == 'profile' ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900' }} block px-3 py-2 rounded-md text-base font-medium">Profil
-            Akun</a>
+        <form action="{{ route('dashboard.index') }}" method="GET" class="block">
+            <button type="submit"
+                class="{{ $active == 'dashboard' ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900' }} w-full text-left px-3 py-2 rounded-md text-base font-medium">
+                Dashboard
+            </button>
+        </form>
+        <form action="{{ route('lowongan.index') }}" method="GET" class="block">
+            <button type="submit"
+                class="{{ $active == 'lowongan' ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900' }} w-full text-left px-3 py-2 rounded-md text-base font-medium">
+                Cari Info Lowongan
+            </button>
+        </form>
+        <form action="{{ route('profile.index') }}" method="GET" class="block">
+            <button type="submit"
+                class="{{ $active == 'profile' ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900' }} w-full text-left px-3 py-2 rounded-md text-base font-medium">
+                Profil Akun
+            </button>
+        </form>
 
         <div class="mt-3 relative">
             <input type="text" placeholder="Search..."
@@ -109,9 +119,7 @@
         </form>
     </div>
 
-</nav>
-
-<script>
+    <script>
     document.getElementById('mobile-menu-button').addEventListener('click', function() {
         const mobileMenu = document.getElementById('mobile-menu');
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
@@ -119,10 +127,14 @@
         mobileMenu.classList.toggle('hidden');
     });
 
-    document.getElementById('user-menu-button')?.addEventListener('click', function() {
-        const userMenu = document.getElementById('user-menu');
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
-        userMenu.classList.toggle('hidden');
-    });
+    var userMenuButton = document.getElementById('user-menu-button');
+    if (userMenuButton) {
+        userMenuButton.addEventListener('click', function() {
+            const userMenu = document.getElementById('user-menu');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            userMenu.classList.toggle('hidden');
+        });
+    }
 </script>
+</nav>
