@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/dashboard/lowongan', LowonganController::class);
     Route::resource('/dashboard/profile', ProfileController::class);
     Route::resource('/dashboard/company', CompanyController::class);
+    //index show create store edit update destroy
 
     // Logout
     Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout');
