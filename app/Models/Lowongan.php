@@ -11,6 +11,7 @@ class Lowongan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'uid',
         'company_profile_id',
         'job_title',
         'job_description',
@@ -21,7 +22,7 @@ class Lowongan extends Model
         'status',
     ];
 
-    public function company()
+    public function companyProfile()
     {
         return $this->belongsTo(CompanyProfile::class, 'company_profile_id');
     }
