@@ -10,10 +10,17 @@ use App\Http\Controllers\Controller;
 
 class LowonganController extends Controller
 {
-    public function index()
+    public function create()
     {
         $companies = CompanyProfile::where('user_id', auth()->id())->get();
-        return view('dashboard.lowongan.index', compact('companies'));
+
+        if ($companies->isEmpty()) {
+            return redirect()
+                ->route('profile.index')
+                ->with('error', 'Anda harus menambahkan profil perusahaan terlebih dahulu sebelum membuat lowongan.');
+        }
+
+        return view('dashboard.lowongan.create', compact('companies'));
     }
 
     public function store(Request $request)
@@ -53,8 +60,9 @@ class LowonganController extends Controller
         $lowongan = Lowongan::where('uid', $uid)->firstOrFail();
 
         $company = CompanyProfile::where('id', $lowongan->company_profile_id)->firstOrFail();
+        $companies = CompanyProfile::where('user_id', auth()->id())->get();
 
-        return view('dashboard.lowongan.editlowongan', compact('lowongan'));
+        return view('dashboard.lowongan.edit', compact('lowongan', 'company', 'companies'));
     }
 
     public function update(Request $request, $uid)
@@ -76,5 +84,5 @@ class LowonganController extends Controller
         return redirect()
             ->route('dashboard.index')
             ->with('success', 'Lowongan pekerjaan berhasil diperbarui.');
-    }   
+    }
 }
