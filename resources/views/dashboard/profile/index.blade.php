@@ -62,12 +62,11 @@
                             </div>
                         @endforeach
                     @else
-                        <div
-                            class="text-center py-12 px-6 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+                        <x-layout.empty-state>
                             <i class="fas fa-building text-4xl text-gray-400 mb-3"></i>
                             <h4 class="text-lg font-medium text-gray-700">Anda Belum Memiliki Perusahaan</h4>
                             <p class="text-gray-500 mt-1">Tambahkan perusahaan Anda untuk mulai membuat lowongan.</p>
-                        </div>
+                        </x-layout.empty-state>
                     @endif
                 </div>
             </div>

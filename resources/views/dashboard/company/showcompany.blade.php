@@ -62,22 +62,22 @@
                         </div>
                     </div>
 
-                    <!-- Tombol Edit -->
-                    <a href="{{ route('company.edit', $company->uid) }}"
-                        class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
-                        Edit Perusahaan
-                    </a>
+                    <div class="flex container-between gap-2">
+                        <a href="{{ route('company.edit', $company->uid) }}"
+                            class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+                            Edit Perusahaan
+                        </a>
 
-                    <!-- Tombol Hapus -->
-                    <form action="{{ route('company.destroy', $company->uid) }}" method="POST"
-                        onsubmit="return confirm('Yakin ingin menghapus perusahaan ini?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition">
-                            Hapus Perusahaan
-                        </button>
-                    </form>
+                        <form action="{{ route('company.destroy', $company->uid) }}" method="POST"
+                            onsubmit="return confirm('Yakin ingin menghapus perusahaan ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition">
+                                Hapus Perusahaan
+                            </button>
+                        </form>
+                    </div>
 
                     {{-- <a href="{{ route('company.edit', $company->uid) }}" class="text-blue-600 hover:underline">Edit Perusahaan?</a> --}}
                 </div>
