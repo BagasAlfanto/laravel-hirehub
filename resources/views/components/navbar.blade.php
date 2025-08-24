@@ -50,7 +50,8 @@
                         class="bg-gray-100 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         aria-expanded="false" aria-haspopup="true">
                         <span class="sr-only">Open user menu</span>
-                        <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-blue-600 text-white font-medium text-lg">
+                        <span
+                            class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-blue-600 text-white font-medium text-lg">
                             {{ strtoupper(collect(explode(' ', Auth::user()->username))->take(2)->map(fn($w) => Str::substr($w, 0, 1))->implode('')) }}
                         </span>
                     </button>
@@ -120,21 +121,21 @@
     </div>
 
     <script>
-    document.getElementById('mobile-menu-button').addEventListener('click', function() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
-        mobileMenu.classList.toggle('hidden');
-    });
-
-    var userMenuButton = document.getElementById('user-menu-button');
-    if (userMenuButton) {
-        userMenuButton.addEventListener('click', function() {
-            const userMenu = document.getElementById('user-menu');
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
             const isExpanded = this.getAttribute('aria-expanded') === 'true';
             this.setAttribute('aria-expanded', !isExpanded);
-            userMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('hidden');
         });
-    }
-</script>
+
+        var userMenuButton = document.getElementById('user-menu-button');
+        if (userMenuButton) {
+            userMenuButton.addEventListener('click', function() {
+                const userMenu = document.getElementById('user-menu');
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                userMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
 </nav>
