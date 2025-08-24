@@ -14,7 +14,7 @@
                                 Dashboard
                             </button>
                         </form>
-                        <form action="{{ route('lowongan.index') }}" method="GET" class="inline">
+                        <form action="{{ route('lowongan.create') }}" method="GET" class="inline">
                             <button type="submit"
                                 class="{{ $active == 'lowongan' ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900' }} px-3 py-2 rounded-md text-sm font-medium">
                                 Buka Lowongan
@@ -85,7 +85,7 @@
                 Dashboard
             </button>
         </form>
-        <form action="{{ route('lowongan.index') }}" method="GET" class="block">
+        <form action="{{ route('lowongan.create') }}" method="GET" class="block">
             <button type="submit"
                 class="{{ $active == 'lowongan' ? 'bg-blue-600 text-white' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900' }} w-full text-left px-3 py-2 rounded-md text-base font-medium">
                 Cari Info Lowongan
@@ -129,12 +129,22 @@
         });
 
         var userMenuButton = document.getElementById('user-menu-button');
+        var userMenu = document.getElementById('user-menu');
         if (userMenuButton) {
-            userMenuButton.addEventListener('click', function() {
-                const userMenu = document.getElementById('user-menu');
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !isExpanded);
-                userMenu.classList.toggle('hidden');
+            userMenuButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            userMenu.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function(e) {
+            if (!userMenu.classList.contains('hidden')) {
+                if (!userMenu.contains(e.target) && e.target !== userMenuButton) {
+                userMenu.classList.add('hidden');
+                userMenuButton.setAttribute('aria-expanded', false);
+                }
+            }
             });
         }
     </script>

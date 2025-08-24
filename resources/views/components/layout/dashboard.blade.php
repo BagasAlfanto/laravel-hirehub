@@ -12,8 +12,17 @@
 <body class="bg-gray-100">
     @if (session('success'))
         <div id="toast"
-            class="fixed top-40 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-500">
-            {{ session('success') }}
+            class="fixed top-20 right-8 w-80 bg-white border border-green-500 shadow-2xl rounded-lg px-6 py-5 z-50 opacity-0 transition-opacity duration-500 flex items-start gap-4">
+            <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-green-100 rounded-md">
+            <i class="fas fa-check text-green-600 text-xl"></i>
+            </div>
+            <div class="flex-1">
+            <span class="block text-green-700 font-bold text-base mb-1">Berhasil!</span>
+            <span class="text-gray-700 text-sm">{{ session('success') }}</span>
+            </div>
+            <button onclick="document.getElementById('toast').remove()" class="ml-2 text-gray-400 hover:text-gray-700 focus:outline-none">
+            <i class="fas fa-times text-lg"></i>
+            </button>
         </div>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
