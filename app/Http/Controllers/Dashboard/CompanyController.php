@@ -10,7 +10,8 @@ use App\Http\Controllers\Controller;
 
 class CompanyController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         if (CompanyProfile::where('user_id', auth()->id())->count() >= 3) {
             return redirect()
                 ->route('profile.index')
@@ -56,6 +57,38 @@ class CompanyController extends Controller
             ->with('success', 'Perusahaan berhasil ditambahkan.');
     }
 
+    public function update(Request $request, $uid)
+    {
+        $company = CompanyProfile::where('uid', $uid)->firstOrFail();
+
+        // validasi
+        $validated = $request->validate([
+            'company_name'        => 'required|string|max:255',
+            'company_email'       => 'required|email|max:255|unique:company_profiles,company_email,' . $company->id,
+            'company_phone'       => 'nullable|string|max:20',
+            'company_description' => 'nullable|string',
+            'company_website'     => 'nullable|max:255',
+            'company_logo'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'company_address'     => 'nullable|string|max:255',
+            'company_field'       => 'nullable|string|max:255',
+        ]);
+
+        if ($request->hasFile('company_logo')) {
+            // hapus logo lama jika ada
+            if ($company->company_logo) {
+                \Storage::disk('public')->delete($company->company_logo);
+            }
+            $validated['company_logo'] = $request->file('company_logo')->store('company_logos', 'public');
+        }
+
+        $company->update($validated);
+
+        return redirect()
+            ->route('profile.index')
+            ->with('success', 'Perusahaan berhasil diperbarui.');
+    }
+
+
     public function show($uid)
     {
         $company = CompanyProfile::where('uid', $uid)->firstOrFail();
@@ -88,5 +121,4 @@ class CompanyController extends Controller
             ->route('profile.index')
             ->with('success', 'Perusahaan berhasil dihapus.');
     }
-
 }
