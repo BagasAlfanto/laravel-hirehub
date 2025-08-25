@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -14,16 +15,18 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
+            'uid' => Str::uuid()->toString(),
             'username' => 'Penyedia Kerja',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('password'),
+            'email' => 'bagas@gmail.com',
+            'password' => bcrypt('bagasgeming'),
             'role' => 'penyedia',
         ]);
 
         User::create([
+            'uid' => Str::uuid()->toString(),
             'username' => 'Pencari Kerja',
-            'email' => 'user@user.com',
-            'password' => bcrypt('password'),
+            'email' => 'bintang@gmail.com',
+            'password' => bcrypt('bintanggeming'),
             'role' => 'pencari',
         ]);
     }

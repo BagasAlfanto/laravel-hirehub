@@ -11,7 +11,6 @@
 
 <body class="bg-gray-100 h-screen flex items-center justify-center">
     <div class="flex flex-col md:flex-row w-full max-w-5xl bg-white shadow-md rounded-2xl overflow-hidden">
-        <!-- Kiri -->
         <div class="w-full md:w-1/2 p-6 md:p-10">
             <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Buat Akun</h2>
             <form action="{{ route('register.store') }}" method="POST" class="space-y-5"
@@ -65,7 +64,6 @@
                 </p>
             </form>
         </div>
-        <!-- Kanan -->
         <div class="hidden md:flex w-full md:w-1/2 bg-gray-200 items-center justify-center p-6">
             <img src="/illustration.png" alt="Ilustrasi" class="max-h-60 md:max-h-96 object-contain w-full">
         </div>
@@ -73,7 +71,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Toggle password
             document.querySelectorAll('.toggle-password').forEach(item => {
                 item.addEventListener('click', function() {
                     const input = document.querySelector(this.getAttribute('toggle'));
@@ -111,8 +108,5 @@
             @endif
         });
     </script>
-
-
 </body>
-
 </html>

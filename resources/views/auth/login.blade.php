@@ -12,13 +12,11 @@
 
 <body class="bg-white h-screen flex items-center justify-center">
     <div class="flex flex-col md:flex-row md:mx-8 w-full max-w-5xl shadow-xl rounded-2xl overflow-hidden">
-        <!-- Kiri: Gambar -->
         <div
             class="hidden md:flex md:w-1/2 bg-gradient-to-br from-[#8C4DFF] via-purple-500 to-purple-400 items-center justify-center p-6">
             <img src="/illustration.png" alt="gambar" class="max-h-96 object-contain">
         </div>
-
-        <!-- Kanan: Form Login -->
+        
         <div class="w-full md:w-1/2 bg-white p-6 md:p-10">
             <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Login ke Akunmu</h2>
             <form action="{{ route('login.store') }}" method="POST" class="space-y-5"

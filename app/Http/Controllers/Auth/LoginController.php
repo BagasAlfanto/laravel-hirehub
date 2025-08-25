@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         if (auth()->attempt($validate)) {
             $request->session()->regenerate();
-            return redirect()->intended('home');
+            return redirect('/dashboard');
         }
 
         return back()->withErrors([

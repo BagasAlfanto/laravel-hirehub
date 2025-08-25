@@ -19,14 +19,15 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'uid',
         'username',
         'email',
         'password',
         'role',
     ];
 
-    public function company(){
-        return $this->hasOne(CompanyProfile::class);
+    public function companies(){
+        return $this->hasMany(CompanyProfile::class);
     }
 
     /**
@@ -35,6 +36,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
+        'uid',
         'password',
         'remember_token',
     ];
