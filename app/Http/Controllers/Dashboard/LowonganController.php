@@ -14,11 +14,6 @@ class LowonganController extends Controller
     {
         $companies = CompanyProfile::where('user_id', auth()->id())->get();
 
-        if ($companies->isEmpty()) {
-            return redirect()
-                ->route('profile.index')
-                ->with('error', 'Anda harus menambahkan profil perusahaan terlebih dahulu sebelum membuat lowongan.');
-        }
 
         return view('dashboard.lowongan.create', compact('companies'));
     }
